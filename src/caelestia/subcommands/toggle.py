@@ -73,10 +73,14 @@ class Command:
                 },
             },
             "music": {
-                "spotify": {
+                "youtube_music": {
                     "enable": True,
-                    "match": [{"class": "Spotify"}, {"initialTitle": "Spotify"}, {"initialTitle": "Spotify Free"}],
-                    "command": ["spicetify", "watch", "-s"],
+                    "match": [
+                        {"class": "com.github.th_ch.youtube_music"},
+                        {"initialClass": "com.github.th_ch.youtube_music"},
+                        {"initialTitle": "com.github.th_ch.youtube_music"},
+                    ],
+                    "command": ["youtube-music"],   # binaire AUR
                     "move": True,
                 },
                 "feishin": {
