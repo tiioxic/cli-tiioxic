@@ -26,7 +26,7 @@ The main control script for the Caelestia dotfiles.
 
 The cli is available from the AUR as `caelestia-cli-git`. To install it you can use
 an AUR helper like [`yay`](https://github.com/Jguer/yay), or manually download the
-PKGBUILD and run `makepkg -si`.
+PKGBUILD and run `makepkg -si --clean --cleanbuild`.
 
 e.g. using yay
 
