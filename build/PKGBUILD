@@ -1,0 +1,67 @@
+# Maintainer: Tiioxic
+
+pkgname=caelestia-cli-tiioxic-git
+_pkgbase=caelestia-cli
+pkgver=r311.fe2c390
+pkgrel=1
+pkgdesc="Caelestia CLI (fork Tiioxic)"
+arch=('any')
+url="https://github.com/tiioxic/cli-tiioxic"
+license=('GPL-3.0-only')
+
+# IMPORTANT : remplace l'original
+provides=('caelestia-cli-git' 'caelestia-cli')
+conflicts=('caelestia-cli-git' 'caelestia-cli')
+
+# Dépendances runtime (adapte si l'amont en requiert d'autres)
+depends=(
+  'python'
+  'python-packaging'
+  'python-requests'
+)
+
+# Outils de build PEP 517 (ajoute python-hatchling / python-poetry-core si le projet l'utilise)
+makedepends=(
+  'git'
+  'python-build'
+  'python-installer'
+  'python-wheel'
+  'python-setuptools'
+)
+
+# Source : ton fork. Optionnel : cible une branche précise avec #branch=
+source=("${pkgname}::git+https://github.com/tiioxic/cli-tiioxic.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${pkgname}"
+  # Version style r<commitcount>.<shorthash>
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+}
+
+prepare() {
+  cd "${srcdir}/${pkgname}"
+  # Rien à faire si le fork contient déjà les modifs.
+  # (Si tu préfères patcher ici, ajoute le patch/commande dans cette fonction)
+}
+
+build() {
+  cd "${srcdir}/${pkgname}"
+  # Build roue PEP 517
+  python -m build --wheel --no-isolation
+}
+
+package() {
+  cd "${srcdir}/${pkgname}"
+  # Installe la roue dans $pkgdir
+  python -m installer --destdir="$pkgdir" dist/*.whl
+
+  # Optionnel : licences/doc si présentes
+  if [[ -f LICENSE ]]; then
+    install -Dm644 LICENSE "$pkgdir/usr/share/licenses/${pkgname}/LICENSE"
+  fi
+  if [[ -d docs ]]; then
+    install -dm755 "$pkgdir/usr/share/doc/${pkgname}"
+    cp -r docs/* "$pkgdir/usr/share/doc/${pkgname}/"
+  fi
+}
