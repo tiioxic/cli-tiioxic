@@ -26,22 +26,13 @@ class Command:
 
     def fetch_emojis(self) -> None:
         data = [
-            "¿? question upside down reversed spanish",
+            "€ euros",
             "← left arrow",
             "↑ up arrow",
             "→ right arrow",
             "↓ down arrow",
-            "←↑→↓ all directions up down left right arrows",
-            "⇇ leftwards paired arrows",
-            "⇉ rightwards paired arrows",
-            "⇈ upwards paired arrows",
-            "⇊ downwards paired arrows",
-            "⬱ three leftwards arrows",
-            "⇶ three rightwards arrows",
             "• dot circle separator",
             "「」 japanese quote square bracket",
-            "¯\\_(ツ)_/¯ shrug idk i dont know",
-            "(ง🔥ﾛ🔥)ง person with fire eyes eyes on fire",
             "↵ enter key return",
             "° degrees",
             "™ tm trademark",
